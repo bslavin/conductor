@@ -10,14 +10,14 @@ Share this with any Claude Code session, agent, or team member that needs to con
 |---|---|
 | Proxmox UI | https://192.168.2.172:8006 |
 | Nginx Proxy Manager | http://192.168.2.177:81 |
-| Infisical | http://192.168.2.177:8080 |
+| Infisical | https://192.168.2.177:8443 |
 | Mem0 API | http://192.168.2.177:8070 |
 
 ### From Anywhere (Tailscale)
 | Service | URL |
 |---|---|
 | Nginx Proxy Manager | http://conductor-main:81 |
-| Infisical | http://conductor-main:8080 |
+| Infisical | https://conductor-main:8443 |
 | Mem0 API | http://conductor-main:8070 |
 | SSH | ssh brad@conductor-main |
 
@@ -43,7 +43,7 @@ REST API for storing and retrieving memories across all agents.
 
 Web UI for managing API keys, tokens, and credentials across all agents and services.
 
-**URL:** http://conductor-main:8080
+**URL:** https://conductor-main:8443
 
 ## Nginx Proxy Manager
 

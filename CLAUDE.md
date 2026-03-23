@@ -14,7 +14,7 @@ Orchestration hub for DuoCircle's AI agent workforce and Dockerized tools, runni
 | Service | Port | URL (Tailscale) | Purpose |
 |---|---|---|---|
 | Nginx Proxy Manager | 81 | http://conductor-main:81 | Reverse proxy admin |
-| Infisical | 8080 | http://conductor-main:8080 | Secrets management |
+| Infisical | 8443 | https://conductor-main:8443 | Secrets management (HTTPS) |
 | Mem0 | 8070 | http://conductor-main:8070 | Shared agent memory API |
 
 ## Quick Commands
