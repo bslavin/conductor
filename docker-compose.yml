@@ -52,16 +52,18 @@ services:
 
   mem0:
     <<: *common
-    image: mem0ai/mem0:latest
+    build:
+      context: ./services/mem0
     container_name: conductor-mem0
     ports:
       - "${MEM0_PORT:-8070}:8080"
     environment:
-      MEM0_API_KEY: ${MEM0_API_KEY}
-      MEM0_DB_URL: postgresql://${MEM0_DB_USER:-mem0}:${MEM0_DB_PASSWORD}@mem0-db:5432/${MEM0_DB_NAME:-mem0}
+      MEM0_DB_USER: ${MEM0_DB_USER:-mem0}
+      MEM0_DB_PASSWORD: ${MEM0_DB_PASSWORD}
+      MEM0_DB_NAME: ${MEM0_DB_NAME:-mem0}
+      MEM0_DB_HOST: mem0-db
       MEM0_GRAPH_STORE_URL: bolt://mem0-neo4j:7687
       MEM0_GRAPH_STORE_PASSWORD: ${MEM0_NEO4J_PASSWORD}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
       OPENAI_API_KEY: ${OPENAI_API_KEY}
     depends_on:
       mem0-db:
