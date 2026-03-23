@@ -116,11 +116,19 @@ services:
     ports:
       - "${INFISICAL_PORT:-8080}:8080"
     environment:
+      NODE_ENV: production
       DB_CONNECTION_URI: postgresql://${INFISICAL_DB_USER:-infisical}:${INFISICAL_DB_PASSWORD}@infisical-db:5432/${INFISICAL_DB_NAME:-infisical}
       REDIS_URL: redis://infisical-redis:6379
       ENCRYPTION_KEY: ${INFISICAL_ENCRYPTION_KEY}
       AUTH_SECRET: ${INFISICAL_AUTH_SECRET}
       SITE_URL: ${INFISICAL_SITE_URL:-http://localhost:8080}
+      SMTP_HOST: ${INFISICAL_SMTP_HOST:-}
+      SMTP_PORT: ${INFISICAL_SMTP_PORT:-587}
+      SMTP_FROM_ADDRESS: ${INFISICAL_SMTP_FROM_ADDRESS:-}
+      SMTP_FROM_NAME: ${INFISICAL_SMTP_FROM_NAME:-Infisical}
+      SMTP_USERNAME: ${INFISICAL_SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${INFISICAL_SMTP_PASSWORD:-}
+      OTEL_TELEMETRY_COLLECTION_ENABLED: "false"
     depends_on:
       infisical-db:
         condition: service_healthy
