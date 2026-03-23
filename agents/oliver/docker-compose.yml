@@ -1,0 +1,43 @@
+# Oliver — Marketing Agent
+# Runs OpenClaw gateway connected to Telegram
+# Migrated from Mac Mini at 192.168.10.243
+#
+# Usage: docker compose up -d
+# Logs:  docker compose logs -f oliver
+
+services:
+  oliver:
+    image: node:22-slim
+    container_name: conductor-oliver
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      ANTHROPIC_API_KEY: ${OLIVER_ANTHROPIC_API_KEY}
+      PERPLEXITY_API_KEY: ${OLIVER_PERPLEXITY_API_KEY}
+      MEM0_API_URL: http://conductor-mem0:8070
+      MEM0_AGENT_ID: oliver-marketing
+    volumes:
+      - oliver_data:/app/.openclaw
+      - ./config:/app/config:ro
+    ports:
+      - "${OLIVER_GATEWAY_PORT:-18789}:18789"
+    command: >
+      sh -c "npm install -g openclaw@latest &&
+             openclaw gateway --port 18789"
+    networks:
+      - default
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  oliver_data:
+
+networks:
+  default:
+    name: conductor_proxy
+    external: true
